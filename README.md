@@ -5,7 +5,7 @@
 - Nome: Marcos Henrique Santos Cunha
 - Matrícula: 19.1.8003
 - Curso: Sistemas de Informação
-- Semestre/Ano correntes: 2021/2
+- Semestre/Ano correntes: 2021/1
 - Link para o seu GitHub: github.com/Marcoshsc
 
 ## [Projeto final:](./Projeto/README.md) 
