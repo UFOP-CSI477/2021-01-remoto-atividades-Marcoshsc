@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 - Prompt</title>
+  <script>
+    'use strict'
+
+    function Pessoa(name, age, address) {
+      this.name = name;
+      this.age = age;
+      this.address = address;
+    }
+
+    function carregarDados() {
+      const name = window.prompt('Digite seu nome!')
+      const age = window.prompt('Digite sua idade!')
+      const address = window.prompt('Digite seu endereço!')
+      
+      const pessoa = new Pessoa(name, age, address)
+      document.getElementById('name').innerHTML = `Nome: ${pessoa.name}`
+      document.getElementById('age').innerHTML = `Idade: ${pessoa.age}`
+      document.getElementById('address').innerHTML = `Endereço: ${pessoa.address}`
+    }
+  </script>
+</head>
+<body>
+  <h1>Ex 01 - Prompt</h1>  
+  <div>
+    <p id="name">Nome</p>
+    <p id="age">Idade</p>
+    <p id="address">Endereço</p>
+  </div>
+  <button onclick="carregarDados()">Inserir dados</button>
+</body>
+</html>
