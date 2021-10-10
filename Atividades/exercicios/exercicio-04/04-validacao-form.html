@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="styles/globals.css" />
+    <link rel="stylesheet" type="text/css" href="styles/pessoas/main.css" />
+    <title>Pessoas</title>
+    <script src="validacao.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="nav-bar">
+        <ul>
+          <li class="nav-item">
+            <a href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="estados.html">Estados</a>
+          </li>
+          <li class="nav-item">
+            <a href="cidades.html">Cidades</a>
+          </li>
+          <li class="nav-item">
+            <a href="produtos.html">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a href="pessoas.html">Pessoas</a>
+          </li>
+          <li class="nav-item">
+            <a href="compras.html">Compras</a>
+          </li>
+          <li class="nav-item">
+            <a href="perfil.html">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a href="home.html">Sair</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="cadastro">
+        <h1>Cadastro de pessoas</h1>
+        <form name="formCadastroPessoa">
+          <div class="formItem form-group">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" class="form-control"/>
+          </div>
+          <div class="formItem form-group" class="input-group">
+            <label for="address">Endereço</label>
+            <input type="text" name="address" class="form-control" />
+          </div>
+          <div class="formItem form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" class="form-control" />
+          </div>
+          <div class="formItem form-group">
+            <label for="phone">Telefone de contato</label>
+            <input type="text" name="phone" class="form-control" />
+          </div>
+          <div class="gender">
+            <label>Gênero:</label>
+            <div class="formItem">
+              <label for="gender-male">Masculino</label>
+              <input type="radio" name="gender" id="gender-male" value="M" />
+            </div>
+            <div class="formItem">
+              <label for="gender-female">Feminino</label>
+              <input type="radio" name="gender" id="gender-female" value="F" />
+            </div>
+            <div class="formItem">
+              <label for="gender-non-binary">Não Binário</label>
+              <input type="radio" name="gender" id="gender-non-binary" value="NB" />
+            </div>
+          </div>
+        </form>
+        <button class="btn btn-primary" onclick="submit()">Enviar</button>
+      </div>
+      <br />
+      <br />
+      <a href="pessoas.html" class="link-primary">Voltar</a>
+    </main>
+  </body>
+</html>
