@@ -1,0 +1,71 @@
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.cadastro form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.cadastro form button {
+  border: none;
+  background: none;
+  padding: 10px;
+  width: 100px;
+  border: 1px solid rgba(0,0,0,0.15)
+}
+
+.cadastro form button:hover {
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.10);
+}
+
+.formItem {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.gender {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.table {
+  width: 100%;
+  border: none;
+}
+
+.table tr {
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.table th {
+  padding: 5px;
+}
+
+.table td {
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 5px;
+}
