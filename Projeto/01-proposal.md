@@ -32,7 +32,7 @@
 <!-- Construir alguns protótipos para a aplicação, disponibilizá-los no Github e descrever o que foi considerado. //-->
 ### 4. Protótipo
 
-  Protótipos para as páginas inicial, criação de votação, participação em votação, resultado de votação foram elaborados, e podem ser encontrados em https://www.figma.com/file/dfEh93B0hqEbygFsA45rny/Sistema-de-Votação?node-id=0%3A1. Este documento é incremental e pode ser alterado com o tempo, a medida que mais protótipos forem surgindo ou precisem ser modificados.
+  Protótipos para as páginas inicial, criação de votação, participação em votação, resultado de votação foram elaborados, e podem ser encontrados em https://www.figma.com/file/dfEh93B0hqEbygFsA45rny/Sistema-de-Votação?node-id=0%3A1. Este documento é incremental e pode ser alterado com o tempo, a medida que mais protótipos forem surgindo ou precisem ser modificados. Lembrando que esse é um documento com duas páginas, então lembre-se de mudar de página para ver todos os protótipos. Para mudar de página no figma basta clicar no ícone do próprio figma (menu), no canto superior esquerdo da tela.
 
 ### 5. Referências
 
