@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css"/>
+  <script src="bower_components/math-expression-evaluator/dist/browser/math-expression-evaluator.js"></script>
+  <script src="scripts.js"></script>
+  <title>Exercício Calculadora</title>
+</head>
+<body>
+  <div class="container">
+    <div class="display">
+      <p id="display-result"></p>
+      <p id="display-operation"></p>
+    </div>
+    <div class="buttons">
+      <div class="button" onclick="putElement(1)">
+        <p>1</p>
+      </div>
+      <div class="button" onclick="putElement(2)">
+        <p>2</p>
+      </div>
+      <div class="button" onclick="putElement(3)">
+        <p>3</p>
+      </div>
+      <div class="button" onclick="putElement('/')">
+        <p>/</p>
+      </div>
+      <div class="button" onclick="putElement(4)">
+        <p>4</p>
+      </div>
+      <div class="button" onclick="putElement(5)">
+        <p>5</p>
+      </div>
+      <div class="button" onclick="putElement(6)">
+        <p>6</p>
+      </div>
+      <div class="button" onclick="putElement('*')">
+        <p>*</p>
+      </div>
+      <div class="button" onclick="putElement(7)">
+        <p>7</p>
+      </div>
+      <div class="button" onclick="putElement(8)">
+        <p>8</p>
+      </div>
+      <div class="button" onclick="putElement(9)">
+        <p>9</p>
+      </div>
+      <div class="button" onclick="putElement('-')">
+        <p>-</p>
+      </div>
+      <div class="button" onclick="putElement(0)">
+        <p>0</p>
+      </div>
+      <div class="button" onclick="putElement('.')">
+        <p>.</p>
+      </div>
+      <div class="button equalButton" onclick="calculateResult()">
+        <p>=</p>
+      </div>
+      <div class="button" onclick="putElement('+')">
+        <p>+</p>
+      </div>
+      <div class="button clear" onclick="clearInput()">
+        Clear
+      </div>
+    </div>
+  </div>
+</body>
+</html>
