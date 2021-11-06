@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Descrição
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Essa atividade foi feita usando a biblioteca react. Pra rodar o software, instale o node na sua máquina, depois instale o gerenciador de pacotes yarn globalmente com npm install --global yarn, entrando nessa pasta você digita yarn para instalar as dependências, depois basta executar o comando yarn start para rodar. Vai rodar na porta 3000 do computador.
 
 ## Available Scripts
 
