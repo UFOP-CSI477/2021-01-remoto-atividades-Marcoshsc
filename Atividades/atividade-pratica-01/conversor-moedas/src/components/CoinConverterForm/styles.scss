@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coinForm {
+  width: 100%;
+  padding: 10px; 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  button {
+    width: 200px;
+    font-size: 16px;
+    background: none;
+    border: none;
+    border: 1px solid rgba(0,0,0,0.40);
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: all 300ms;
+    }
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  input {
+    padding: 10px;
+    font-size: 16px;
+  }
+  select {
+    font-size: 16px;
+    background: none;
+      padding: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
