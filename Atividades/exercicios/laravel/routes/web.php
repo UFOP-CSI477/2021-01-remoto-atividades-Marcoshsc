@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Produto;
+use App\Http\Controllers\ProdutoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,25 +16,27 @@ use App\Models\Produto;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('principal');
+})->name('principal');
 
-Route::get('/produtos/todos', function() {
+Route::resource('/produtos', ProdutoController::class);
 
-     $produtos = Produto::all();
+// Route::get('/produtos/todos', function() {
 
-     return view('lista', [ 'dados' => $produtos ]);
+//      $produtos = Produto::all();
 
-});
+//      return view('lista', [ 'dados' => $produtos ]);
 
- Route::get('/produtos/{id}', function($id) {
+// });
 
-     $produto = Produto::findOrFail($id);
+//  Route::get('/produtos/{id}', function($id) {
 
-     if ( $produto == null ) {
-         return 'ID inválido';
-     }
+//      $produto = Produto::findOrFail($id);
 
-     return view('lista', [ 'dados' => $produto ]);
+//      if ( $produto == null ) {
+//          return 'ID inválido';
+//      }
 
-});
+//      return view('lista', [ 'dados' => $produto ]);
+
+// });
