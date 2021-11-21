@@ -23,9 +23,9 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() // method="post" action="store"
     {
-        //
+        return view('produtos.create');
     }
 
     /**
@@ -36,7 +36,17 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        // $estado = new Estado;
+        // $estado->nome = $request->nome;
+        // $estado->sigla = $request->sigla;
+        // $estado->save();
+
+        Produto::create($request->all());
+        session()->flash('mensagem', 'Produto cadastrado com sucesso!');
+        return redirect()->route('produtos.index');
+
     }
 
     /**
@@ -47,7 +57,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        return view('produtos.show', [ 'produto' => $produto]);
     }
 
     /**
@@ -56,9 +66,9 @@ class ProdutoController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produto $produto)
+    public function edit(Produto $produto) 
     {
-        //
+        return view('produtos.edit', [ 'produto' => $produto ]);
     }
 
     /**
@@ -70,7 +80,11 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $produto->fill($request->all());
+        $produto->save();
+
+        session()->flash('mensagem', 'Produto atualizado com sucesso!');
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -81,6 +95,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        return redirect()->route('produtos.index');
     }
 }
