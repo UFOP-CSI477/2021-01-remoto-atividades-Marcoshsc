@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Produto;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\PessoaController;
+use App\Http\Controllers\CompraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +24,10 @@ Route::get('/', function () {
 })->name('principal');
 
 Route::resource('/produtos', ProdutoController::class);
+Route::resource('/estados', EstadoController::class);
+Route::resource('/cidades', CidadeController::class);
+Route::resource('/pessoas', PessoaController::class);
+Route::resource('/compras', CompraController::class);
 
 // Route::get('/produtos/todos', function() {
 

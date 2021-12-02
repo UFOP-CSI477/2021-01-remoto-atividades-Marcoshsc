@@ -25,16 +25,16 @@
             <a href="{{route('produtos.index')}}">Produtos</a>
           </li>
           <li class="nav-item">
-            <a href="cidades.html">Cidades</a>
+            <a href="{{route('cidades.index')}}">Cidades</a>
           </li>
           <li class="nav-item">
-            <a href="produtos.html">Produtos</a>
+            <a href="{{route('estados.index')}}">Estados</a>
           </li>
           <li class="nav-item">
-            <a href="pessoas.html">Pessoas</a>
+            <a href="{{route('pessoas.index')}}">Pessoas</a>
           </li>
           <li class="nav-item">
-            <a href="compras.html">Compras</a>
+            <a href="{{route('compras.index')}}">Compras</a>
           </li>
           <li class="nav-item">
             <a href="perfil.html">Perfil</a>
