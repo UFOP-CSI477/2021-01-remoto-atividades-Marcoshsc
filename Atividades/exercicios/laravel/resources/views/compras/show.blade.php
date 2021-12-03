@@ -2,19 +2,19 @@
 
 @section('conteudo')
 
-<h1>Dados da Pessoa</h1>
+<h1>Dados da Compra</h1>
 
-<p>Id: {{ $pessoa->id }}</p>
-<p>Nome: {{ $pessoa->nome }}</p>
-<p>Cidade: {{ $pessoa->cidade->nome }}</p>
+<p>Id: {{ $compra->id }}</p>
+<p>Pessoa: {{ $compra->pessoa->nome }}</p>
+<p>Produto: {{ $compra->produto->nome }}</p>
 
-<a href="{{route('pessoas.edit', $pessoa->id)}}">Editar</a>
-<a href="{{ route('pessoas.index') }}">Voltar</a>
+<a href="{{route('compras.edit', $compra->id)}}">Editar</a>
+<a href="{{ route('compras.index') }}">Voltar</a>
 
 <form name="frmDelete"
-      action="{{route('pessoas.destroy', $pessoa->id)}}"
+      action="{{route('compras.destroy', $compra->id)}}"
       method="post"
-      onsubmit="return confirm('Confirma exclusão da pessoa?');">
+      onsubmit="return confirm('Confirma exclusão da compra?');">
 
     @csrf
     @method('DELETE')

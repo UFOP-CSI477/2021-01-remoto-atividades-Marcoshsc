@@ -3,26 +3,39 @@
 @section('conteudo')
 
 
-    <form action="{{ route('pessoas.store') }}" method="post">
+    <form action="{{ route('compras.store') }}" method="post">
 
         @csrf
 
         <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" class="form-control" name="nome" id="nome">
-        </div>
+            <label for="pessoa_id">Pessoa</label>
 
-        <div class="form-group">
-            <label for="cidade_id">Cidade</label>
+            <select name="pessoa_id" id="pessoa_id" class="form-control">
 
-            <select name="cidade_id" id="cidade_id" class="form-control">
-
-            @foreach($cidades as $c)
-                <option value="{{$c->id}}">{{$c->nome}}</option>
+            @foreach($pessoas as $p)
+                <option value="{{$p->id}}">{{$p->nome}}</option>
             @endforeach
 
             </select>
 
+        </div>
+
+        <div class="form-group">
+            <label for="produto_id">Produto</label>
+
+            <select name="produto_id" id="produto_id" class="form-control">
+
+            @foreach($produtos as $pr)
+                <option value="{{$pr->id}}">{{$pr->nome}}</option>
+            @endforeach
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="data">Data</label>
+            <input type="date" name="data" id="data" class="form-control"/>
         </div>
 
         <div class="text-right">

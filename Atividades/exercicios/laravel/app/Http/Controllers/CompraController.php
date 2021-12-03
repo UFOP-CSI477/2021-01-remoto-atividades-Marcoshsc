@@ -28,7 +28,9 @@ class CompraController extends Controller
      */
     public function create()
     {
-        //
+        $pessoas = Pessoa::orderBy('nome')->get();
+        $produtos = Produto::orderBy('nome')->get();
+        return view('compras.create', ['pessoas' => $pessoas, 'produtos' => $produtos]);
     }
 
     /**
@@ -39,7 +41,9 @@ class CompraController extends Controller
      */
     public function store(StoreCompraRequest $request)
     {
-        //
+        Compra::create($request->all());
+        session()->flash('mensagem', 'Compra inserida com sucesso!');
+        return redirect()->route('compras.index');
     }
 
     /**
@@ -50,7 +54,7 @@ class CompraController extends Controller
      */
     public function show(Compra $compra)
     {
-        //
+        return view('compras.show', ['compra' => $compra]);
     }
 
     /**
@@ -61,7 +65,12 @@ class CompraController extends Controller
      */
     public function edit(Compra $compra)
     {
-        //
+        $pessoas = Pessoa::orderBy('nome')->get();
+        $produtos = Produto::orderBy('nome')->get();
+        return view('compras.edit',
+            ['compra' => $compra,
+             'pessoas' => $pessoas,
+             'produtos' => $produtos]);
     }
 
     /**
@@ -73,7 +82,11 @@ class CompraController extends Controller
      */
     public function update(UpdateCompraRequest $request, Compra $compra)
     {
-        //
+        $compra->fill($request->all());
+        $compra->save();
+
+        session()->flash('mensagem', 'Compra atualizada com sucesso!');
+        return redirect()->route('compras.index');
     }
 
     /**
@@ -84,6 +97,8 @@ class CompraController extends Controller
      */
     public function destroy(Compra $compra)
     {
-        //
+        $compra->delete();
+        session()->flash('mensagem', 'Compra excluída com sucesso!');
+        return redirect()->route('compras.index');
     }
 }
