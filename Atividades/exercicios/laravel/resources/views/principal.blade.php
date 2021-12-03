@@ -37,10 +37,7 @@
             <a href="{{route('compras.index')}}">Compras</a>
           </li>
           <li class="nav-item">
-            <a href="perfil.html">Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a href="home.html">Sair</a>
+            <a href="{{route('relatorio.index')}}">Relatórios</a>
           </li>
         </ul>
       </nav>
