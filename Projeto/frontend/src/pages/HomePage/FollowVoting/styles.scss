@@ -1,0 +1,32 @@
+@import "../../../styles/flex.scss";
+
+.follow-voting {
+  font-size: 1.5rem;
+  &__container {
+    width: 100%;
+    padding: 20px;
+  }
+  &__form {
+    width: 100%;
+    @include flex-row(flex-start, center, 20px);
+    input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid rgba(0,0,0,0.4);
+    }
+    button {
+      border: none;
+      color: #fafafa;
+      border-radius: 4px;
+      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 1rem;
+      background-color: #1B065E;
+      border: 1px solid rgba(0,0,0,0.15);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

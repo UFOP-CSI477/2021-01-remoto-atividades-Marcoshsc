@@ -1,0 +1,31 @@
+@import "../../../styles/flex.scss";
+
+.my-votings {
+  &__container {
+    @include flex-column(flex-start, flex-start, 20px);
+    width: 100%;
+    padding: 20px;
+  }
+  &__title-and-new {
+    @include flex-row(space-between, flex-start, 0px);
+    width: 100%;
+    button {
+      border: none;
+      color: #fafafa;
+      border-radius: 4px;
+      padding: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 1rem;
+      background-color: #1B065E;
+      border: 1px solid rgba(0,0,0,0.15);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &__votings-container {
+    @include flex-column(flex-start, flex-start, 20px);
+    width: 100%;
+  }
+}

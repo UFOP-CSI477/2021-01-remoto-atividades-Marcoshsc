@@ -1,0 +1,8 @@
+@import "../../styles/flex.scss";
+
+.homepage {
+  &__container {
+    width: 100%;
+    @include flex-column(flex-start, flex-start, 30px);
+  }
+}
