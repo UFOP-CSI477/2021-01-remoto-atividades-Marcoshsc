@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @db.VarChar(100)
+  email String @unique
+  password String
+  votings Voting[]
+  votes VotingUser[]
+}
+
+model Voting {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  description String
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int 
+  start DateTime
+  end DateTime
+  identity Boolean @default(false)
+  votes VotingUser[]
+  candidates Candidate[] 
+}
+
+model VotingUser {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  voting Voting @relation(fields: [votingId], references: [id])
+  candidate Candidate @relation(fields: [candidateId], references: [id])
+  userId Int
+  votingId Int
+  candidateId Int
+  @@unique([votingId, userId])
+}
+
+model Candidate {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  avatar String
+  voting Voting @relation(fields: [votingId], references: [id])
+  votingId Int
+  receivedVotes VotingUser[]
+}

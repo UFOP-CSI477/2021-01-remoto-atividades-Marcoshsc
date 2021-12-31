@@ -23,6 +23,18 @@ const authReducer = (state=INITIAL_STATE, action) => {
         authError: { error: false, message: '' }
       }
     }
+    case AuthActions.FETCH_USER_INFO_SUCCESS: {
+      return {
+        ...state,
+        currentUser: action.payload,
+      }
+    }
+    case AuthActions.LOGOUT_USER: {
+      return {
+        ...state,
+        currentUser: undefined
+      }
+    }
     case AuthActions.LOGIN_USER_FAILURE: {
       return {
         ...state,

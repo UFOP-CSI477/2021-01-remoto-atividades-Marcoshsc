@@ -1,0 +1,57 @@
+@import "../../styles/flex.scss";
+
+.new-voting {
+  &__button {
+    border: none;
+    color: #fafafa;
+    border-radius: 4px;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    align-self: center;
+    font-size: 1rem;
+    background-color: #1B065E;
+    border: 1px solid rgba(0,0,0,0.15);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__container {
+    width: 100%;
+    padding: 20px;
+    @include flex-column(flex-start, flex-start, 20px);
+  }
+  &__title {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+  }
+  &__form {
+    width: 100%;
+    @include flex-column(flex-start, flex-start, 20px);
+  }
+  &__input-group {
+    @include flex-row(flex-start, center, 20px);
+    width: 100%;
+    input {
+      flex-grow: 1;
+      padding: 10px;
+    }
+    label {
+      width: 100px;
+    }
+  }
+  &__candidates {
+    width: 100%;
+    padding-top: 30px;
+    @include flex-column(flex-start, flex-start, 20px);
+    &__header {
+      @include flex-row(space-between, center, 20px);
+      width: 100%;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+    &__title {
+      font-size: 1.5rem;
+    }
+  }
+}

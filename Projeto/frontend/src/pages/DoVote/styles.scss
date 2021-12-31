@@ -1,0 +1,50 @@
+@import "../../styles/flex.scss";
+
+.do-vote {
+  &__container {
+    @include flex-column(flex-start, flex-start, 40px);
+    padding: 20px;
+    width: 100%;
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+      width: 100%;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+  &__candidates {
+    @include flex-row(space-between, center, 20px);
+    flex-wrap: wrap;
+  }
+  &__confirm {
+    &__message {
+      width: 100%;
+      text-align: center;
+    }
+    &__actions {
+      @include flex-row(center, center, 20px);
+      width: 100%;
+      button {
+        border: none;
+        color: #fafafa;
+        border-radius: 4px;
+        padding: 10px;
+        padding-right: 20px;
+        padding-left: 20px;
+        align-self: center;
+        font-size: 1.5rem;
+        background-color: #1B065E;
+        border: 1px solid rgba(0,0,0,0.15);
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    &__candidate {
+      @include flex-row(center, center, 0px);
+      width: 100%;
+    }
+  }
+}

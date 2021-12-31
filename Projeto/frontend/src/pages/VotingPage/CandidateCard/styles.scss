@@ -1,0 +1,26 @@
+@import "../../../styles/flex.scss";
+
+.candidate-card {
+  &__container {
+    @include flex-row(flex-start, center, 20px);
+    border: 1px solid rgba(0,0,0,0.4);
+    width: 400px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+    p {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+  &__point-hover {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

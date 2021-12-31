@@ -1,5 +1,5 @@
 import React from 'react'
-import { FiLink } from 'react-icons/fi'
+import { FiLink, FiTrash } from 'react-icons/fi'
 import { AiOutlineEye } from 'react-icons/ai'
 import './styles.scss'
 
@@ -21,6 +21,9 @@ const VotingCard = ({ voting }) => {
         </div>
         <div className="voting-card__actions__icon">
           <AiOutlineEye/>
+        </div>
+        <div className="voting-card__actions__icon">
+          <FiTrash/>
         </div>
       </div>
     </div>
