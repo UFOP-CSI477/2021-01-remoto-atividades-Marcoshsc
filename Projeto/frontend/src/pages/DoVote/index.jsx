@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { getCurrentUser } from "../../redux/auth/selectors";
+import { selectVoting, vote } from "../../redux/votings/actions";
+import { getSelectedVoting, getSelectedVotingError, getSelectedVotingLoading } from "../../redux/votings/selectors";
 import CandidateCard from "../VotingPage/CandidateCard";
 import "./styles.scss";
 
-const candidate = {
-  name: "Julia Trule",
-  avatar:
-    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-};
-
 const DoVote = () => {
+
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [confirm, setConfirm] = useState();
+
+  const voting = useSelector(getSelectedVoting)
+  const currentUser = useSelector(getCurrentUser)
+  const loading = useSelector(getSelectedVotingLoading)
+  const { error, message } = useSelector(getSelectedVotingError)
+
+  useEffect(() => {
+    if(currentUser) {
+      dispatch(selectVoting(id))
+    }
+  }, [id, dispatch, currentUser])
 
   const handleClick = (candidate) => {
     return () => {
@@ -19,6 +34,22 @@ const DoVote = () => {
 
   const handleCancel = () => {
     setConfirm(undefined)
+  }
+
+  const handleVote = () => {
+    dispatch(vote(voting.id, confirm.id, () => navigate(`/voting/${voting.id}`)))
+  }
+
+  if(loading) {
+    return <p>Carregando votação...</p>
+  }
+
+  if(error) {
+    return <p>Erro ao carregar a votação: {message}</p>
+  }
+
+  if(!voting) {
+    return null
   }
 
   return (
@@ -31,7 +62,7 @@ const DoVote = () => {
           <CandidateCard candidate={confirm} />
         </div>
         <div className="do-vote__confirm__actions">
-          <button>Confirmar</button>
+          <button onClick={handleVote}>Confirmar</button>
           <button onClick={handleCancel}>Cancelar</button>
         </div>
         </>
@@ -39,11 +70,9 @@ const DoVote = () => {
         <>
           <h3>Selecione o candidato que quer votar.</h3>
           <div className="do-vote__candidates">
-            <CandidateCard onClick={handleClick(candidate)} candidate={candidate} />
-            <CandidateCard onClick={handleClick(candidate)} candidate={candidate} />
-            <CandidateCard onClick={handleClick(candidate)} candidate={candidate} />
-            <CandidateCard onClick={handleClick(candidate)} candidate={candidate} />
-            <CandidateCard onClick={handleClick(candidate)} candidate={candidate} />
+            {voting.candidates.map(candidate => (
+              <CandidateCard key={candidate.id} onClick={handleClick(candidate)} candidate={candidate} />
+            ))}
           </div>
         </>
       )}

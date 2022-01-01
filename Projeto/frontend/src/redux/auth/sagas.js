@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "@redux-saga/core/effects";
-import { AuthActions, fetchUserInfoSuccess, loginUserFailure, loginUserSuccess } from "./actions";
+import { AuthActions, fetchUserInfoFailure, fetchUserInfoSuccess, loginUserFailure, loginUserSuccess } from "./actions";
 import { fetchUserInfo, login, logout, signup } from "./services";
 
 export default function* authSagas() {
@@ -22,7 +22,7 @@ function* fetchUserInfoSaga() {
     const user = yield call(fetchUserInfo)
     yield put(fetchUserInfoSuccess(user))
   } catch(err) {
-    console.log('User not logged, returning to login page.')
+    yield put(fetchUserInfoFailure())
   }
 }
 

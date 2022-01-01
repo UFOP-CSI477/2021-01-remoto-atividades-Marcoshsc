@@ -5,6 +5,7 @@ export const AuthActions = {
 
   FETCH_USER_INFO: '[Auth] Fetch User Info',
   FETCH_USER_INFO_SUCCESS: '[Auth] Fetch User Info Success',
+  FETCH_USER_INFO_FAILURE: '[Auth] Fetch User Info Failure',
 
   LOGOUT_USER: '[Auth] Logout User',
 
@@ -38,6 +39,10 @@ export const fetchUserInfo = () => ({
 export const fetchUserInfoSuccess = (user) => ({
   type: AuthActions.FETCH_USER_INFO_SUCCESS,
   payload: user
+})
+
+export const fetchUserInfoFailure = () => ({
+  type: AuthActions.FETCH_USER_INFO_FAILURE
 })
 
 export const logoutUser = () => ({

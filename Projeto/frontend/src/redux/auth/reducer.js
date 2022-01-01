@@ -3,7 +3,8 @@ import { AuthActions } from "./actions"
 const INITIAL_STATE = {
   currentUser: undefined,
   loadingUser: false,
-  authError: { error: false, message: '' }
+  authError: { error: false, message: '' },
+  checkedLogged: false
 }
 
 const authReducer = (state=INITIAL_STATE, action) => {
@@ -27,6 +28,13 @@ const authReducer = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        checkedLogged: true
+      }
+    }
+    case AuthActions.FETCH_USER_INFO_FAILURE: {
+      return {
+        ...state,
+        checkedLogged: true
       }
     }
     case AuthActions.LOGOUT_USER: {

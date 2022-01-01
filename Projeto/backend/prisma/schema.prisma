@@ -22,7 +22,7 @@ model User {
 model Voting {
   id Int @id @default(autoincrement())
   title String @db.VarChar(255)
-  description String
+  description String @db.Text
   owner User @relation(fields: [ownerId], references: [id])
   ownerId Int 
   start DateTime
@@ -35,7 +35,7 @@ model Voting {
 model VotingUser {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
-  voting Voting @relation(fields: [votingId], references: [id])
+  voting Voting @relation(fields: [votingId], references: [id], onDelete: Cascade)
   candidate Candidate @relation(fields: [candidateId], references: [id])
   userId Int
   votingId Int
@@ -46,8 +46,8 @@ model VotingUser {
 model Candidate {
   id Int @id @default(autoincrement())
   name String @db.VarChar(100)
-  avatar String
-  voting Voting @relation(fields: [votingId], references: [id])
+  avatar String @db.Text
+  voting Voting @relation(fields: [votingId], references: [id], onDelete: Cascade)
   votingId Int
   receivedVotes VotingUser[]
 }

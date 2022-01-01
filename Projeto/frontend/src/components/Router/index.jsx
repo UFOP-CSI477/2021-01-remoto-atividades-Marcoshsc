@@ -10,7 +10,7 @@ import VotingPage from "../../pages/VotingPage";
 import DoVote from "../../pages/DoVote";
 import NewVoting from "../../pages/NewVoting";
 import { useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/auth/selectors";
+import { getCheckedLogged, getCurrentUser } from "../../redux/auth/selectors";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom'
@@ -21,6 +21,7 @@ const Router = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector(getCurrentUser)
+  const checkedLogged = useSelector(getCheckedLogged)
   const location = useLocation()
 
   useEffect(() => {
@@ -28,13 +29,13 @@ const Router = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if(!user && !['/signin', '/signup'].includes(location.pathname)) {
+    if(!user && !['/signin', '/signup'].includes(location.pathname) && checkedLogged) {
       navigate('/signin')
     }
     if(user && ['/signin', '/signup'].includes(location.pathname)) {
       navigate('/home')
     }
-  }, [user, navigate, location])
+  }, [user, navigate, location, checkedLogged])
 
   return (
         <div className="applicationContainer">
