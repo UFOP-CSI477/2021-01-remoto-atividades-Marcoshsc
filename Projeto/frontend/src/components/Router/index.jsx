@@ -29,10 +29,11 @@ const Router = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if(!user && !['/signin', '/signup'].includes(location.pathname) && checkedLogged) {
-      navigate('/signin')
+    if(!user && !['/signin', '/signup', '/'].includes(location.pathname) && checkedLogged) {
+      navigate('/')
     }
-    if(user && ['/signin', '/signup'].includes(location.pathname)) {
+    console.log(user)
+    if(user && ['/signin', '/signup', '/'].includes(location.pathname)) {
       navigate('/home')
     }
   }, [user, navigate, location, checkedLogged])

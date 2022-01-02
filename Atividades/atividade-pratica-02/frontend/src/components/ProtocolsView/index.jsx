@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getFormattedDate } from '../../utils/date'
 
-const ProtocolTypesView = () => {
+const ProtocolsView = () => {
 
   const navigate = useNavigate()
   const [protocolTypes, setProtocolTypes] = useState([])
 
   const getProtocolTypes = () => {
-    axios.get('http://localhost:3001/subjects/', { withCredentials: true }).then(response => {
+    axios.get('http://localhost:3001/protocols/', { withCredentials: true }).then(response => {
       setProtocolTypes(response.data)
     })
   }
@@ -20,12 +20,12 @@ const ProtocolTypesView = () => {
   }, [])
 
   const handleCreate = () => {
-    navigate('/administrative/protocol-types/create')
+    navigate('/administrative/protocols/create')
   }
 
   const handleDelete = (id) => {
     return () => {
-      axios.delete(`http://localhost:3001/subjects/delete/${id}`, { withCredentials: true }).then(() => {
+      axios.delete(`http://localhost:3001/protocols/delete/${id}`, { withCredentials: true }).then(() => {
         getProtocolTypes()
       })
     }
@@ -33,7 +33,7 @@ const ProtocolTypesView = () => {
 
   const handleEdit = (id) => {
     return () => {
-      navigate(`/administrative/protocol-types/${id}/edit`)
+      navigate(`/administrative/protocols/${id}/edit`)
     }
   }
 
@@ -48,24 +48,27 @@ const ProtocolTypesView = () => {
           <Button onClick={handleBack}>Voltar</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button onClick={handleCreate}>Criar novo tipo de protocolo</Button>
+          <Button onClick={handleCreate}>Criar novo protocolo</Button>
         </Grid>
         <Grid item xs={12}>
-          <Typography>Tipos de Protocolos:</Typography>
+          <Typography>Protocolos:</Typography>
         </Grid>
         {protocolTypes.map(el => (
           <Grid key={el.id} item xs={12}>
             <Grid container maxWidth="100%" style={{padding: 20}}>
-              <Grid item xs={3}>
-                <Typography>Nome: {el.name}</Typography>
+              <Grid item xs={2}>
+                <Typography>Pessoa: {el.person}</Typography>
               </Grid>
-              <Grid item xs={3}>
-                <Typography>Preço: {el.price}</Typography>
+              <Grid item xs={2}>
+                <Typography>Description: {el.description}</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
+                <Typography>Data: {el.date}</Typography>
+              </Grid>
+              <Grid item xs={2}>
                 <Typography>Criação: {getFormattedDate(new Date(el.createdAt))}</Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
                 <Typography>Atualização: {getFormattedDate(new Date(el.updatedAt))}</Typography>
               </Grid>
               <Grid item xs={1}>
@@ -83,4 +86,4 @@ const ProtocolTypesView = () => {
   )
 }
 
-export default ProtocolTypesView
+export default ProtocolsView

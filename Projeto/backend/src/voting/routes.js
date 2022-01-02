@@ -18,7 +18,7 @@ votingRouter.get('/', async (req, res) => {
   const formattedVotings = votings.map(voting => ({
     ...voting,
     numberOfVoters: voting.votes.length,
-    open: voting.end.getTime() > new Date(),
+    open: voting.end.getTime() > new Date() && voting.start.getTime() < new Date(),
     votes: undefined
   }))
   res.status(200).send(formattedVotings)
@@ -107,9 +107,30 @@ votingRouter.get('/:id', async (req, res) => {
     return
   }
 
+  const getWinner = () => {
+    const votesPerCandidate = {}
+    voting.candidates.forEach(candidate => {
+      votesPerCandidate[candidate.id] = 0
+    })
+    voting.votes.forEach(vote => {
+      votesPerCandidate[vote.candidateId] += 1
+    })
+    const voteValues = Object.values(votesPerCandidate)
+    const greater = voteValues.sort()[voteValues.length - 1]
+    const winners = Object.keys(votesPerCandidate).filter(candidateId => votesPerCandidate[candidateId] === greater)
+    const winnersNumber = winners.map(el => Number.parseInt(el))
+    return voting.candidates.filter(candidate => winnersNumber.includes(candidate.id))
+  }
+
+  const winners = voting.end.getTime() > new Date() ? undefined :  getWinner()
+  const canVote = !voting.votes.map(vote => vote.userId).includes(userId)
+  const votingStarted = voting.start.getTime() < new Date()
+
   const formattedVote = {
     ...voting,
-    canVote: !voting.votes.map(vote => vote.userId).includes(userId),
+    canVote: canVote && votingStarted,
+    reason: !votingStarted ? "Essa votação ainda não começou." : "Você já registrou seu voto nessa votação.",
+    winners,
     votes: undefined
   }
   res.status(200).send(formattedVote)
@@ -124,8 +145,7 @@ votingRouter.post('/vote', async (req, res) => {
 
   const voting = await prisma.voting.findFirst({
     where: {
-      id: votingId,
-      ownerId: userId
+      id: votingId
     },
     include: {
       candidates: true,

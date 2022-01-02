@@ -94,7 +94,7 @@ const NewVoting = () => {
           {candidates.map((candidate, idx) => (
             <Fragment key={idx}>
               <div className="new-voting__candidates__header">
-                <h3>Candidato {idx}</h3>
+                <h3>Candidato {idx + 1}</h3>
                 <button className="new-voting__button" onClick={handleRemoveCandidate(idx)} type="button">Remover candidato</button>
               </div>
               <div className="new-voting__input-group">

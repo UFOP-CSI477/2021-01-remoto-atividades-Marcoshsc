@@ -15,5 +15,6 @@ export const logout = async () => {
 }
 
 export const signup = async (user) => {
-  await axios.post('http://localhost:3001/auth/signup', user, { withCredentials: true })
+  const response = await axios.post('http://localhost:3001/auth/signup', user, { withCredentials: true })
+  return response.data
 }

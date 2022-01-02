@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router';
 import { Route, Routes } from "react-router-dom";
 import AdministrativeArea from '../AdministrativeArea';
 import MainPage from '../MainPage';
+import ProtocolsView from '../ProtocolsView';
+import ProtocolCreate from '../ProtocolCreate';
 import ProtocolTypeCreate from '../ProtocolTypeCreate';
 import ProtocolTypeEdit from '../ProtocolTypeEdit';
 import ProtocolTypesView from '../ProtocolTypesView';
@@ -35,6 +37,9 @@ const Router = () => {
           <Route path="/administrative/protocol-types" element={<ProtocolTypesView/>}/>
           <Route path="/administrative/protocol-types/create" element={<ProtocolTypeCreate/>}/>
           <Route path="/administrative/protocol-types/:id/edit" element={<ProtocolTypeEdit/>}/>
+          <Route path="/administrative/protocols" element={<ProtocolsView/>}/>
+          <Route path="/administrative/protocols/create" element={<ProtocolCreate/>}/>
+          {/* <Route path="/administrative/protocol-types/:id/edit" element={<ProtocolTypeEdit/>}/> */}
         </Routes>
     </div></LoggedContext.Provider>
   )

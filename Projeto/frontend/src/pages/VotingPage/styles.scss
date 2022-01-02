@@ -1,6 +1,16 @@
 @import "../../styles/flex.scss";
 
 .voting-page {
+  &__winners {
+    @include flex-column(center, center, 20px);
+    height: 100%;
+    p {
+      font-size: 1.5rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  }
   &__container {
     @include flex-column(flex-start, flex-start, 20px);
     padding: 20px;

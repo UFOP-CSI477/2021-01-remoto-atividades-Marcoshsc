@@ -10,6 +10,10 @@ const LandingPage = () => {
     navigate('/signup')
   }
 
+  const handleSignin = () => {
+    navigate('/signin')
+  }
+
   return (
     <div className="landing-page__container">
       <img src="votingImage.png" alt="Vote.it logo"/>
@@ -19,7 +23,7 @@ const LandingPage = () => {
       </div>
       <div className="landing-page__actions">
         <button className="landing-page__actions__button" onClick={handleSignup}>Cadastrar</button> 
-        <button className="landing-page__actions__button">Fazer login</button> 
+        <button className="landing-page__actions__button" onClick={handleSignin}>Fazer login</button> 
       </div> 
     </div>
   )
