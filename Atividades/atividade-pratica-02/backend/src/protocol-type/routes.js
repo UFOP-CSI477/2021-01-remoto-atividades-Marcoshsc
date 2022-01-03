@@ -6,7 +6,13 @@ const protocolTypeRouter = Router();
 protocolTypeRouter.get("/", async (req, res) => {
   const prisma = new PrismaClient();
 
-  const subjects = await prisma.subject.findMany();
+  const subjects = await prisma.subject.findMany({
+    orderBy: [
+      {
+        name: 'asc'
+      }
+    ]
+  });
 
   res.status(200).send(subjects);
 

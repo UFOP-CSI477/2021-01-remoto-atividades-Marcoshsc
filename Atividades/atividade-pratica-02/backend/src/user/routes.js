@@ -19,7 +19,13 @@ userRouter.get('/me', async (req, res) => {
 userRouter.get('/', async (req, res) => {
   const prisma = new PrismaClient()
 
-  const users = await prisma.user.findMany()
+  const users = await prisma.user.findMany({
+    orderBy: [
+      {
+        name: 'asc'
+      }
+    ]
+  })
 
   await prisma.$disconnect()
   res.status(200).send(users)

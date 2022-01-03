@@ -10,7 +10,12 @@ protocolRouter.get("/", async (req, res) => {
     include: {
       user: true,
       subject: true
-    }
+    },
+    orderBy: [
+      {
+        date: 'asc'
+      }
+    ]
   });
 
   res.status(200).send(protocols);

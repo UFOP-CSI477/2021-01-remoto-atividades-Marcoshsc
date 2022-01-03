@@ -11,6 +11,9 @@ import ProtocolTypesView from '../ProtocolTypesView';
 import SignIn from '../Signin';
 import SignUp from '../Signup';
 import ProtocolEdit from '../ProtocolEdit';
+import ProtocolAndTypeReport from '../ProtocolAndTypeReport';
+import ProtocolTypeReport from '../ProtocolTypeReport';
+import UsersReport from '../UsersReport';
 
 export const LoggedContext = createContext({ logged: false, setLogged: undefined })
 
@@ -33,6 +36,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/administrative" element={<AdministrativeArea/>}/>
+          <Route path="/general" element={<ProtocolTypeReport/>}/>
           <Route path="/administrative/login" element={<SignIn/>}/>
           <Route path="/administrative/signup" element={<SignUp/>}/>
           <Route path="/administrative/protocol-types" element={<ProtocolTypesView/>}/>
@@ -41,6 +45,8 @@ const Router = () => {
           <Route path="/administrative/protocols" element={<ProtocolsView/>}/>
           <Route path="/administrative/protocols/create" element={<ProtocolCreate/>}/>
           <Route path="/administrative/protocols/:id/edit" element={<ProtocolEdit/>}/>
+          <Route path="/administrative/protocol-and-type-report" element={<ProtocolAndTypeReport/>}/>
+          <Route path="/administrative/users-report" element={<UsersReport/>}/>
         </Routes>
     </div></LoggedContext.Provider>
   )

@@ -42,6 +42,14 @@ const AdministrativeArea = () => {
     navigate('/administrative/protocols')
   }
 
+  const handleProtocolAndTypeReport = () => {
+    navigate('/administrative/protocol-and-type-report')
+  }
+
+  const handleGoToUsersReport = () => {
+    navigate('/administrative/users-report')
+  }
+
   return (
     <Container maxWidth="100%" style={{ padding: 20 }}>
       <Grid container spacing={2}>
@@ -72,12 +80,12 @@ const AdministrativeArea = () => {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={handleProtocolAndTypeReport}>
                 Relatório de protocolos e tipos de protocolos
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={handleGoToUsersReport}>
                 Relatório de usuários
               </Button>
             </Grid>
