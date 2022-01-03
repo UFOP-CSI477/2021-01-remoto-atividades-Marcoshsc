@@ -7,6 +7,7 @@ const authRouter = require('./auth/routes')
 const middleware = require('./auth/middleware')
 const userRouter = require('./user/routes')
 const protocolTypeRouter = require('./protocol-type/routes')
+const protocolRouter = require('./protocol/routes')
 
 const app = express()
 app.use(express.json())
@@ -22,6 +23,7 @@ app.use('/auth', authRouter)
 app.use(middleware)
 app.use('/user', userRouter)
 app.use('/subjects', protocolTypeRouter)
+app.use('/protocols', protocolRouter)
 
 app.listen(3001, () => {
   console.log('Listening on port 3001')

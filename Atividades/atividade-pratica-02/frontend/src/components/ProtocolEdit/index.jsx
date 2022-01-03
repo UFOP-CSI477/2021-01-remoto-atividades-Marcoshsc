@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Box, TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import { useNavigate } from "react-router";
+import { Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { getFormattedDateInput } from "../../utils/date";
 
-const ProtocolCreate = () => {
+const ProtocolEdit = () => {
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const [err, setErr] = useState("");
   const [isErr, setIsErr] = useState(false);
 
   const [users, setUsers] = useState([]);
   const [subjects, setSubjects] = useState([]);
-  const [selectedUser, setSelectedUser] = useState()
-  const [selectedSubject, setSelectedSubject] = useState()
+  const [selectedUser, setSelectedUser] = useState();
+  const [selectedSubject, setSelectedSubject] = useState();
+  const [protocol, setProtocol] = useState();
 
   const handleBack = () => {
     navigate("/administrative/protocols");
@@ -26,13 +30,33 @@ const ProtocolCreate = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if(!protocol) {
+      return
+    }
+    setSelectedUser(protocol.userId)
+  }, [protocol])
+
+  useEffect(() => {
+    if(!protocol) {
+      return
+    }
+    setSelectedSubject(protocol.subjectId)
+  }, [protocol])
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/protocols/${id}`, { withCredentials: true }).then((response) => {
+      setProtocol(response.data);
+    });
+  }, [id]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     axios
-      .post(
-        "http://localhost:3001/protocols/create",
+      .put(
+        `http://localhost:3001/protocols/update/${id}`,
         {
           person: data.get("person"),
           description: data.get("description"),
@@ -50,15 +74,26 @@ const ProtocolCreate = () => {
         if (err.response?.data?.message) {
           setErr(err.response.data.message);
         } else {
-          setErr("Erro interno ao cadastrar protocolo.");
+          setErr("Erro interno ao cadastrar tipo de protocolo.");
         }
       });
   };
 
+  if (!protocol) {
+    return "Protocolo não encontrado.";
+  }
+
   return (
     <Box
       component="form"
-      style={{ display: "flex", flexDirection: "column", gap: 20, justifyContent: "flex-start", alignItems: "flex-start", padding: 20 }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        padding: 20,
+      }}
       onSubmit={handleSubmit}
       noValidate
       sx={{ mt: 1 }}
@@ -66,17 +101,25 @@ const ProtocolCreate = () => {
       <Button variant="contained" onClick={handleBack}>
         Voltar
       </Button>
-      <TextField margin="normal" required fullWidth id="person" label="Pessoa" name="person" />
-      <TextField margin="normal" required fullWidth name="description" label="Descrição" id="description" />
+      <TextField defaultValue={protocol.person} margin="normal" required fullWidth id="person" label="Pessoa" name="person" />
+      <TextField defaultValue={protocol.description} margin="normal" required fullWidth name="description" label="Descrição" id="description" />
       <div
         style={{ display: "flex", flexDirection: "row", gap: 20, justifyContent: "flex-start", alignItems: "center" }}
       >
         <label>Data</label>
-        <TextField margin="normal" required fullWidth name="date" type="date" id="date" />
+        <TextField defaultValue={getFormattedDateInput(new Date(protocol.date))} margin="normal" required fullWidth name="date" type="date" id="date" />
       </div>
       <FormControl fullWidth>
         <InputLabel id="subject-label">Tipo de protocolo</InputLabel>
-        <Select variant="outlined" value={selectedSubject} onChange={e => setSelectedSubject(e.target.value)} fullWidth labelId="subject-label" id="subject" label="Tipo de protocolo">
+        <Select
+          variant="outlined"
+          value={selectedSubject || ""}
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          fullWidth
+          labelId="subject-label"
+          id="subject"
+          label="Tipo de protocolo"
+        >
           {subjects.map((subject) => (
             <MenuItem value={subject.id}>{subject.name}</MenuItem>
           ))}
@@ -84,7 +127,15 @@ const ProtocolCreate = () => {
       </FormControl>
       <FormControl fullWidth>
         <InputLabel id="user-label">Usuário</InputLabel>
-        <Select variant="outlined" value={selectedUser} onChange={e => setSelectedUser(e.target.value)} fullWidth labelId="user-label" id="user" label="Usuário">
+        <Select
+          variant="outlined"
+          value={selectedUser || ""}
+          onChange={(e) => setSelectedUser(e.target.value)}
+          fullWidth
+          labelId="user-label"
+          id="user"
+          label="Usuário"
+        >
           {users.map((user) => (
             <MenuItem value={user.id}>{user.name}</MenuItem>
           ))}
@@ -98,4 +149,4 @@ const ProtocolCreate = () => {
   );
 };
 
-export default ProtocolCreate;
+export default ProtocolEdit;

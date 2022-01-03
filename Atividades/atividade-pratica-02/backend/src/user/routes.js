@@ -16,4 +16,13 @@ userRouter.get('/me', async (req, res) => {
   res.status(200).send({ ...user, password: undefined })
 })
 
+userRouter.get('/', async (req, res) => {
+  const prisma = new PrismaClient()
+
+  const users = await prisma.user.findMany()
+
+  await prisma.$disconnect()
+  res.status(200).send(users)
+})
+
 module.exports = userRouter

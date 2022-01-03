@@ -63,7 +63,13 @@ const ProtocolsView = () => {
                 <Typography>Description: {el.description}</Typography>
               </Grid>
               <Grid item xs={2}>
-                <Typography>Data: {el.date}</Typography>
+                <Typography>Data: {getFormattedDate(new Date(el.date))}</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography>Tipo de protocolo: {el.subject.name}</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Typography>Usuário: {el.user.name}</Typography>
               </Grid>
               <Grid item xs={2}>
                 <Typography>Criação: {getFormattedDate(new Date(el.createdAt))}</Typography>
@@ -71,10 +77,10 @@ const ProtocolsView = () => {
               <Grid item xs={2}>
                 <Typography>Atualização: {getFormattedDate(new Date(el.updatedAt))}</Typography>
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={2}>
                 <Button onClick={handleEdit(el.id)}>Editar</Button>
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={3}>
                 <Button onClick={handleDelete(el.id)}>Deletar</Button>
               </Grid>
             </Grid>

@@ -10,6 +10,7 @@ import ProtocolTypeEdit from '../ProtocolTypeEdit';
 import ProtocolTypesView from '../ProtocolTypesView';
 import SignIn from '../Signin';
 import SignUp from '../Signup';
+import ProtocolEdit from '../ProtocolEdit';
 
 export const LoggedContext = createContext({ logged: false, setLogged: undefined })
 
@@ -39,7 +40,7 @@ const Router = () => {
           <Route path="/administrative/protocol-types/:id/edit" element={<ProtocolTypeEdit/>}/>
           <Route path="/administrative/protocols" element={<ProtocolsView/>}/>
           <Route path="/administrative/protocols/create" element={<ProtocolCreate/>}/>
-          {/* <Route path="/administrative/protocol-types/:id/edit" element={<ProtocolTypeEdit/>}/> */}
+          <Route path="/administrative/protocols/:id/edit" element={<ProtocolEdit/>}/>
         </Routes>
     </div></LoggedContext.Provider>
   )
