@@ -23,8 +23,10 @@ unitRouter.post("/create", async (req, res) => {
   const prisma = new PrismaClient();
   const unit = req.body;
 
+  const date = new Date(unit.dataNascimento)
+  date.setDate(date.getDate() + 1)
   await prisma.unidade.create({
-    data: { ...unit, dataNascimento: new Date(unit.dataNascimento)},
+    data: { ...unit, dataNascimento: date },
   });
 
   res.status(201).send();
@@ -38,11 +40,13 @@ unitRouter.put("/update/:id", async (req, res) => {
   const unit = req.body;
   const { id } = req.params;
 
+  const date = new Date(unit.dataNascimento)
+  date.setDate(date.getDate() + 1)
   await prisma.unidade.update({
     where: {
       id: Number.parseInt(id),
     },
-    data: { ...unit, dataNascimento: new Date(unit.dataNascimento)},
+    data: { ...unit, dataNascimento: date },
   });
 
   res.status(200).send();

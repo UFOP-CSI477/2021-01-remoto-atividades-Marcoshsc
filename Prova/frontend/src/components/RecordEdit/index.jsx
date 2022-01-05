@@ -61,7 +61,7 @@ const ProtocolEdit = () => {
           data: data.get("date"),
           pessoaId: selectedPeople,
           unidadeId: selectedUnit,
-          vacinaID: selectedVaccine
+          vacinaId: selectedVaccine
         },
         { withCredentials: true }
       )
@@ -117,8 +117,8 @@ const ProtocolEdit = () => {
           id="subject"
           label="Vacina"
         >
-          {vaccines.map((subject) => (
-            <MenuItem value={subject.id}>{subject.name}</MenuItem>
+          {vaccines.map((vaccine) => (
+            <MenuItem value={vaccine.id}>{vaccine.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -133,8 +133,8 @@ const ProtocolEdit = () => {
           id="user"
           label="Pessoa"
         >
-          {peoples.map((user) => (
-            <MenuItem value={user.id}>{user.name}</MenuItem>
+          {peoples.map((people) => (
+            <MenuItem value={people.id}>{people.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -149,7 +149,7 @@ const ProtocolEdit = () => {
           id="unit"
           label="Unidade" >
           {units.map((unit) => (
-            <MenuItem value={unit.id}>{unit.name}</MenuItem>
+            <MenuItem value={unit.id}>{unit.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>

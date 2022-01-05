@@ -23,8 +23,10 @@ peopleRouter.post("/create", async (req, res) => {
   const prisma = new PrismaClient();
   const people = req.body;
 
+  const date = new Date(people.dataNascimento)
+  date.setDate(date.getDate() + 1)
   await prisma.pessoa.create({
-    data: { ...people, dataNascimento: new Date(people.dataNascimento)},
+    data: { ...people, dataNascimento: date },
   });
 
   res.status(201).send();
@@ -38,11 +40,13 @@ peopleRouter.put("/update/:id", async (req, res) => {
   const people = req.body;
   const { id } = req.params;
 
+  const date = new Date(people.dataNascimento)
+  date.setDate(date.getDate() + 1)
   await prisma.pessoa.update({
     where: {
       id: Number.parseInt(id),
     },
-    data: { ...people, dataNascimento: new Date(people.dataNascimento)},
+    data: { ...people, dataNascimento: date },
   });
 
   res.status(200).send();

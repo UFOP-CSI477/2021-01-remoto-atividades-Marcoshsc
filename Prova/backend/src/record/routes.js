@@ -28,9 +28,30 @@ recordRouter.post("/create", async (req, res) => {
   const prisma = new PrismaClient();
   const record = req.body;
 
-  await prisma.registro.create({
-    data: { ...record, date: new Date(record.date)},
+  const vacina = await prisma.vacina.findUnique({
+    where: {
+      id: record.vacinaId
+    }
+  })
+
+  if(vacina.doses === 0) {
+    res.status(400).send({
+      message: 'Não existem doses para serem aplicadas dessa vacina.'
+    })
+    return
+  }
+
+  const date = new Date(record.data)
+  date.setDate(date.getDate() + 1)
+  const updatedRecord = await prisma.registro.create({
+    data: { ...record, data: date },
   });
+  await prisma.vacina.update({
+    where: {
+      id: updatedRecord.vacinaId
+    },
+    data: { ...vacina, doses: vacina.doses - 1 }
+  })
 
   res.status(201).send();
 
@@ -43,12 +64,53 @@ recordRouter.put("/update/:id", async (req, res) => {
   const record = req.body;
   const { id } = req.params;
 
-  await prisma.registro.update({
+  const vacina = await prisma.vacina.findUnique({
+    where: {
+      id: record.vacinaId
+    }
+  })
+
+  if(vacina.doses === 0) {
+    res.status(400).send({
+      message: 'Não existem doses para serem aplicadas dessa vacina.'
+    })
+    return
+  }
+
+  const old = await prisma.registro.findUnique({
+    where: {
+      id: Number.parseInt(id)
+    },
+    include: {
+      vacina: true
+    }
+  })
+
+
+  const date = new Date(record.data)
+  date.setDate(date.getDate() + 1)
+  const newRecord = await prisma.registro.update({
     where: {
       id: Number.parseInt(id),
     },
-    data: { ...record, date: new Date(record.data)},
+    data: { ...record, data: date },
   });
+
+  await prisma.vacina.update({
+    where: {
+      id: record.vacinaId
+    },
+    data: { ...vacina, doses: vacina.doses - 1 }
+  })
+
+  if(old.vacinaId !== newRecord.vacinaId) {
+    await prisma.vacina.update({
+      where: {
+        id: old.vacinaId
+      },
+      data: { ...old.vacina, doses: old.vacina.doses + 1 }
+    })
+  }
 
   res.status(200).send();
 
@@ -59,7 +121,23 @@ recordRouter.delete("/delete/:id", async (req, res) => {
   const prisma = new PrismaClient();
   const { id } = req.params;
 
-  await prisma.request.delete({
+  const element = await prisma.registro.findUnique({
+    where: {
+      id: Number.parseInt(id)
+    },
+    include: {
+      vacina: true
+    }
+  })
+
+  await prisma.vacina.update({
+    where: {
+      id: element.vacinaId
+    },
+    data: { ...element.vacina, doses: element.vacina.doses + 1 }
+  })
+
+  await prisma.registro.delete({
     where: {
       id: Number.parseInt(id),
     },
@@ -75,7 +153,7 @@ recordRouter.get('/:id', async (req, res) => {
 
   const { id } = req.params
 
-  const record = await prisma.request.findUnique({
+  const record = await prisma.registro.findUnique({
     where: {
       id: Number.parseInt(id)
     },

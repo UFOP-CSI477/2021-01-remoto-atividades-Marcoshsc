@@ -3,7 +3,7 @@ import { Box, TextField, Button, Typography, Select, MenuItem, FormControl, Inpu
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-const ProtocolCreate = () => {
+const RecordCreate = () => {
   const navigate = useNavigate();
   const [err, setErr] = useState("");
   const [isErr, setIsErr] = useState(false);
@@ -42,7 +42,7 @@ const ProtocolCreate = () => {
           data: data.get("date"),
           pessoaId: selectedPeople,
           unidadeId: selectedUnit,
-          vacinaID: selectedVaccine
+          vacinaId: selectedVaccine
         },
         { withCredentials: true }
       )
@@ -77,18 +77,18 @@ const ProtocolCreate = () => {
         <TextField margin="normal" required fullWidth name="date" type="date" id="date" />
       </div>
       <FormControl fullWidth>
-        <InputLabel id="subject-label">Tipo de protocolo</InputLabel>
+        <InputLabel id="subject-label">Vacina</InputLabel>
         <Select variant="outlined" value={selectedVaccine} onChange={e => setSelectedVaccine(e.target.value)} fullWidth labelId="subject-label" id="subject" label="Tipo de protocolo">
-          {vaccines.map((subject) => (
-            <MenuItem value={subject.id}>{subject.name}</MenuItem>
+          {vaccines.map((vaccine) => (
+            <MenuItem value={vaccine.id}>{vaccine.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>
       <FormControl fullWidth>
-        <InputLabel id="user-label">Usuário</InputLabel>
+        <InputLabel id="user-label">Pessoa</InputLabel>
         <Select variant="outlined" value={selectedPeople} onChange={e => setSelectedPeople(e.target.value)} fullWidth labelId="user-label" id="user" label="Usuário">
-          {peoples.map((user) => (
-            <MenuItem value={user.id}>{user.name}</MenuItem>
+          {peoples.map((people) => (
+            <MenuItem value={people.id}>{people.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -103,16 +103,16 @@ const ProtocolCreate = () => {
           id="unit"
           label="Unidade" >
           {units.map((unit) => (
-            <MenuItem value={unit.id}>{unit.name}</MenuItem>
+            <MenuItem value={unit.id}>{unit.nome}</MenuItem>
           ))}
         </Select>
       </FormControl>
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Cadastrar protocolo
+        Cadastrar vacina
       </Button>
       {isErr && <Typography>{err}</Typography>}
     </Box>
   );
 };
 
-export default ProtocolCreate;
+export default RecordCreate;
