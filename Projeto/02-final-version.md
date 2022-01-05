@@ -40,15 +40,16 @@ Na database url você pode colocar as suas credenciais do seu banco.
 
 É necessário que você tenha o node js instalado, e também o gerenciador de pacotes yarn. Para rodar o back-end, entre no diretório backend/ e rode os seguintes comandos:
 
-npm install
-npm install -g prisma
-npx prisma generate
-npm start
+    npm install
+    npm install -g prisma
+    npx prisma migrate dev
+    npx prisma generate
+    npm start
 
 E o back-end estará rodando. Para o frontend, entre na pasta frontend/ e rode
 
-yarn install
-yarn start
+    yarn install
+    yarn start
 
 E tudo pronto.
 
