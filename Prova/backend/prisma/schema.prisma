@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./database.sqlite"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pessoa {
+  id Int @id @default(autoincrement())
+  nome String
+  dataNascimento DateTime
+  cpf String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  registros Registro[]
+}
+
+model Unidade {
+  id Int @id @default(autoincrement())
+  nome String  
+  bairro String
+  cidade String
+  estado String
+  dataNascimento String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  registros Registro[]
+}
+
+model Vacina {
+  id Int @id @default(autoincrement())
+  nome String  
+  fabricante String
+  pais String
+  doses Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  registros Registro[]
+}
+
+model Registro {
+  id Int @id @default(autoincrement())
+  data DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pessoa Pessoa @relation(fields: [pessoaId], references: [id])
+  unidade Unidade @relation(fields: [unidadeId], references: [id])
+  vacina Vacina @relation(fields: [vacinaId], references: [id])
+
+  pessoaId Int
+  unidadeId Int
+  vacinaId Int
+}
