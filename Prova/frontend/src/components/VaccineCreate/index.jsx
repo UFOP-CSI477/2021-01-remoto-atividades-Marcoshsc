@@ -71,7 +71,7 @@ const VaccineCreate = () => {
         fullWidth
         name="doses"
         label="Doses"
-        type="text"
+        type="number"
         id="doses"
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

@@ -11,15 +11,13 @@ import PeopleView from '../PeopleView';
 import PeopleCreate from '../PeopleCreate';
 import SignIn from '../Signin';
 import SignUp from '../Signup';
-import ProtocolAndTypeReport from '../ProtocolAndTypeReport';
-import ProtocolTypeReport from '../ProtocolTypeReport';
-import UsersReport from '../UsersReport';
 import UnitView from '../UnitView';
 import UnitEdit from '../UnitEdit';
 import UnitCreate from '../UnitCreate';
 import VaccineView from '../VaccineView';
 import VaccineEdit from '../VaccineEdit';
 import VaccineCreate from '../VaccineCreate';
+import GeneralArea from '../GeneralArea';
 
 export const LoggedContext = createContext({ logged: false, setLogged: undefined })
 
@@ -31,7 +29,7 @@ const Router = () => {
   console.log(location)
 
   useEffect(() => {
-    if(!logged && !['/administrative', '/administrative/login', '/administrative/signup', '/'].includes(location.pathname)) {
+    if(!logged && !['/administrative', '/administrative/login', '/administrative/signup', '/', '/general'].includes(location.pathname)) {
       navigate('/administrative')
     }
   }, [location.pathname, logged, navigate])
@@ -41,8 +39,8 @@ const Router = () => {
     <div className="applicationContainer">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/general" element={<GeneralArea />} />
           <Route path="/administrative" element={<AdministrativeArea/>}/>
-          <Route path="/general" element={<ProtocolTypeReport/>}/>
           <Route path="/administrative/login" element={<SignIn/>}/>
           <Route path="/administrative/signup" element={<SignUp/>}/>
           <Route path="/administrative/people" element={<PeopleView/>}/>
@@ -57,8 +55,6 @@ const Router = () => {
           <Route path="/administrative/records" element={<RecordView/>}/>
           <Route path="/administrative/records/create" element={<RecordCreate/>}/>
           <Route path="/administrative/records/:id/edit" element={<RecordEdit/>}/>
-          <Route path="/administrative/protocol-and-type-report" element={<ProtocolAndTypeReport/>}/>
-          <Route path="/administrative/users-report" element={<UsersReport/>}/>
         </Routes>
     </div></LoggedContext.Provider>
   )

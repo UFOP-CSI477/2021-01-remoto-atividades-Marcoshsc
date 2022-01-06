@@ -16,7 +16,7 @@ const MainPage = () => {
 
   return (
     <Container maxWidth="100%">
-      <Typography component="h1">Sistema de controle de protocolos</Typography>
+      <Typography component="h1">Sistema de controle de vacinação</Typography>
       <Button variant="contained" color="primary" onClick={goToGeneralArea}>Área Geral</Button>
       <Button variant="contained" color="primary" onClick={goToAdministrativeArea}>Área Administrativa</Button>
     </Container>

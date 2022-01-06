@@ -4,85 +4,104 @@ const { Router } = require("express");
 const unitRouter = Router();
 
 unitRouter.get("/", async (req, res) => {
-  const prisma = new PrismaClient();
+  try {
+    const prisma = new PrismaClient();
 
-  const units = await prisma.unidade.findMany({
-    orderBy: [
-      {
-        nome: 'asc'
-      }
-    ]
-  });
+    const units = await prisma.unidade.findMany({
+      orderBy: [
+        {
+          nome: "asc",
+        },
+      ],
+    });
 
-  res.status(200).send(units);
+    res.status(200).send(units);
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
 unitRouter.post("/create", async (req, res) => {
-  const prisma = new PrismaClient();
-  const unit = req.body;
+  try {
+    const prisma = new PrismaClient();
+    const unit = req.body;
 
-  const date = new Date(unit.dataNascimento)
-  date.setDate(date.getDate() + 1)
-  await prisma.unidade.create({
-    data: { ...unit, dataNascimento: date },
-  });
+    const date = new Date(unit.dataNascimento);
+    date.setDate(date.getDate() + 1);
+    await prisma.unidade.create({
+      data: { ...unit, dataNascimento: date },
+    });
 
-  res.status(201).send();
+    res.status(201).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
-
 unitRouter.put("/update/:id", async (req, res) => {
-  const prisma = new PrismaClient();
-  const unit = req.body;
-  const { id } = req.params;
+  try {
+    const prisma = new PrismaClient();
+    const unit = req.body;
+    const { id } = req.params;
 
-  const date = new Date(unit.dataNascimento)
-  date.setDate(date.getDate() + 1)
-  await prisma.unidade.update({
-    where: {
-      id: Number.parseInt(id),
-    },
-    data: { ...unit, dataNascimento: date },
-  });
+    const date = new Date(unit.dataNascimento);
+    date.setDate(date.getDate() + 1);
+    await prisma.unidade.update({
+      where: {
+        id: Number.parseInt(id),
+      },
+      data: { ...unit, dataNascimento: date },
+    });
 
-  res.status(200).send();
+    res.status(200).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
 unitRouter.delete("/delete/:id", async (req, res) => {
-  const prisma = new PrismaClient();
-  const { id } = req.params;
+  try {
+    const prisma = new PrismaClient();
+    const { id } = req.params;
 
-  await prisma.unidade.delete({
-    where: {
-      id: Number.parseInt(id),
-    },
-  });
+    await prisma.unidade.delete({
+      where: {
+        id: Number.parseInt(id),
+      },
+    });
 
-  res.status(200).send();
+    res.status(200).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
-unitRouter.get('/:id', async (req, res) => {
-  const prisma = new PrismaClient()
+unitRouter.get("/:id", async (req, res) => {
+  try {
+    const prisma = new PrismaClient();
 
-  const { id } = req.params
+    const { id } = req.params;
 
-  const unit = await prisma.unidade.findUnique({
-    where: {
-      id: Number.parseInt(id)
-    }
-  })
+    const unit = await prisma.unidade.findUnique({
+      where: {
+        id: Number.parseInt(id),
+      },
+    });
 
-  res.status(200).send(unit)
+    res.status(200).send(unit);
 
-  await prisma.$disconnect()
-})
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
+});
 
 module.exports = unitRouter;

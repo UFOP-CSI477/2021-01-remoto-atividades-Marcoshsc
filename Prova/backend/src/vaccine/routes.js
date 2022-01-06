@@ -4,81 +4,101 @@ const { Router } = require("express");
 const vaccineRouter = Router();
 
 vaccineRouter.get("/", async (req, res) => {
-  const prisma = new PrismaClient();
+  try {
+    const prisma = new PrismaClient();
 
-  const vaccines = await prisma.vacina.findMany({
-    orderBy: [
-      {
-        nome: 'asc'
-      }
-    ]
-  });
+    const vaccines = await prisma.vacina.findMany({
+      orderBy: [
+        {
+          nome: "asc",
+        },
+      ],
+    });
 
-  res.status(200).send(vaccines);
+    res.status(200).send(vaccines);
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
 vaccineRouter.post("/create", async (req, res) => {
-  const prisma = new PrismaClient();
-  const vaccine = req.body;
+  try {
+    const prisma = new PrismaClient();
+    const vaccine = req.body;
 
-  await prisma.vacina.create({
-    data: vaccine  
-  });
+    await prisma.vacina.create({
+      data: vaccine,
+    });
 
-  res.status(201).send();
+    res.status(201).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
-
 vaccineRouter.put("/update/:id", async (req, res) => {
-  const prisma = new PrismaClient();
-  const vaccine = req.body;
-  const { id } = req.params;
+  try {
+    const prisma = new PrismaClient();
+    const vaccine = req.body;
+    const { id } = req.params;
 
-  await prisma.vacina.update({
-    where: {
-      id: Number.parseInt(id),
-    },
-    data: vaccine
-  });
+    await prisma.vacina.update({
+      where: {
+        id: Number.parseInt(id),
+      },
+      data: vaccine,
+    });
 
-  res.status(200).send();
+    res.status(200).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
 });
 
 vaccineRouter.delete("/delete/:id", async (req, res) => {
-  const prisma = new PrismaClient();
-  const { id } = req.params;
+  try {
+    const prisma = new PrismaClient();
+    const { id } = req.params;
 
-  await prisma.vacina.delete({
-    where: {
-      id: Number.parseInt(id),
-    },
-  });
+    await prisma.vacina.delete({
+      where: {
+        id: Number.parseInt(id),
+      },
+    });
 
-  res.status(200).send();
+    res.status(200).send();
 
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } catch (err) {
+    console.log(err)
+    res.status(500).send();
+  }
 });
 
-vaccineRouter.get('/:id', async (req, res) => {
-  const prisma = new PrismaClient()
+vaccineRouter.get("/:id", async (req, res) => {
+  try {
+    const prisma = new PrismaClient();
 
-  const { id } = req.params
+    const { id } = req.params;
 
-  const vaccine = await prisma.vacina.findUnique({
-    where: {
-      id: Number.parseInt(id)
-    }
-  })
+    const vaccine = await prisma.vacina.findUnique({
+      where: {
+        id: Number.parseInt(id),
+      },
+    });
 
-  res.status(200).send(vaccine)
+    res.status(200).send(vaccine);
 
-  await prisma.$disconnect()
-})
+    await prisma.$disconnect();
+  } catch (err) {
+    res.status(500).send();
+  }
+});
 
 module.exports = vaccineRouter;

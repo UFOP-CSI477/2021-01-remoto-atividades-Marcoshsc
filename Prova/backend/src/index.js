@@ -22,13 +22,13 @@ const corsOptions ={
 app.use(cors(corsOptions));
 
 app.use('/auth', authRouter)
+app.use('/records', recordRouter)
 app.use(middleware)
 app.use('/user', userRouter)
 app.use('/people', peopleRouter)
 app.use('/units', unitRouter)
 app.use('/vaccines', vaccineRouter)
 
-app.use('/records', recordRouter)
 
 app.listen(3001, () => {
   console.log('Listening on port 3001')

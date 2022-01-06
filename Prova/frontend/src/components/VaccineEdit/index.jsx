@@ -89,7 +89,7 @@ const UnitEdit = () => {
         fullWidth
         name="doses"
         label="Doses"
-        type="text"
+        type="number"
         id="doses"
         defaultValue={vaccine.doses}
       />
